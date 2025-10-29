@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Facebook</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Mini Facebook 🧑‍🤝‍🧑</h1>
+
+    <div class="section">
+        <h2>Create User</h2>
+        <input id="name" placeholder="Name">
+        <input id="email" placeholder="Email">
+        <input id="bio" placeholder="Bio">
+        <button onclick="createUser()">Create</button>
+    </div>
+
+    <div class="section">
+        <h2>All Users</h2>
+        <button onclick="getUsers()">Get Users</button>
+        <pre id="users"></pre>
+    </div>
+
+    <script>
+        async function createUser() {
+            const res = await fetch('/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    bio: document.getElementById('bio').value
+                })
+            });
+            alert(await res.text());
+        }
+
+        async function getUsers() {
+            const res = await fetch('/users');
+            document.getElementById('users').textContent = JSON.stringify(await res.json(), null, 2);
+        }
+    </script>
+</body>
+</html>

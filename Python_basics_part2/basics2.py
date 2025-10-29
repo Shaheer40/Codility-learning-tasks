@@ -271,6 +271,8 @@ def main():
     print("="*50)
     print(json.dumps(university_records, indent=2))
 
+
+
 # ========== MODULE CHECK ==========
 if __name__ == "__main__":
     main()
